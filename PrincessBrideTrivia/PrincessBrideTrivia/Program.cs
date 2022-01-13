@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Nicholas Johnson
+
+using System;
 using System.IO;
 
 namespace PrincessBrideTrivia
