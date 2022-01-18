@@ -1,98 +1,163 @@
 ﻿// Nicholas Johnson
+using System.Collections;
 
-using System;
-using System.IO;
-
-namespace PrincessBrideTrivia
+namespace PrincessBrideTrivia;
+public class Program
 {
-    public class Program
+    public static void Main()
     {
-        public static void Main(string[] args)
+        Welcome();
+        try
         {
-            string filePath = GetFilePath();
-            Question[] questions = LoadQuestions(filePath);
+            PlayGame();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("An error occured while playing the game:\n" + e.ToString());
+        }
 
-            int numberCorrect = 0;
-            for (int i = 0; i < questions.Length; i++)
+    }
+
+    private static void GameResults(int numberCorrect, int numberOfQuestions)
+    {
+        Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, numberOfQuestions) + " correct! Restart program to try again."); //TODO: different response if Length is null
+    }
+
+    private static void PlayGame()
+    {
+        string filePath = GetFilePath();
+        Question[] questions = LoadQuestions(filePath);
+        questions = RandomizeQuestions(questions);
+
+        int questionNumber = 1;
+        int numberCorrect = 0;
+
+        for (int i = 0; i < questions.Length; i++) //TODO: add null-coalescing operator ?? incase file empty set to 0
+        {
+            bool result = AskQuestion(questions[i], questionNumber);
+            if (result)
             {
-                bool result = AskQuestion(questions[i]);
-                if (result)
-                {
-                    numberCorrect++;
-                }
-            }
-            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
-        }
-
-        public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
-        {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
-        }
-
-        public static bool AskQuestion(Question question)
-        {
-            DisplayQuestion(question);
-
-            string userGuess = GetGuessFromUser();
-            return DisplayResult(userGuess, question);
-        }
-
-        public static string GetGuessFromUser()
-        {
-            return Console.ReadLine();
-        }
-
-        public static bool DisplayResult(string userGuess, Question question)
-        {
-            if (userGuess == question.CorrectAnswerIndex)
-            {
-                Console.WriteLine("Correct");
-                return true;
-            }
-
-            Console.WriteLine("Incorrect");
-            return false;
-        }
-
-        public static void DisplayQuestion(Question question)
-        {
-            Console.WriteLine("Question: " + question.Text);
-            for (int i = 0; i < question.Answers.Length; i++)
-            {
-                Console.WriteLine((i + 1) + ": " + question.Answers[i]);
+                numberCorrect++;
             }
         }
 
-        public static string GetFilePath()
-        {
-            return "Trivia.txt";
-        }
+        GameResults(numberCorrect, questions.Length);
+    }
 
-        public static Question[] LoadQuestions(string filePath)
-        {
-            string[] lines = File.ReadAllLines(filePath);
+    public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
+    {
+        int percent = (int)Math.Round((double)numberCorrectAnswers / (double)numberOfQuestions * 100);
+        return percent + "%";
+    }
 
-            Question[] questions = new Question[lines.Length / 5];
-            for (int i = 0; i < questions.Length; i++)
+    private static void Welcome()
+    {
+        Console.WriteLine("Welcome to Princess Bride Trivia!\n" +
+                "Please type in the number for the your answer and hit enter to submit.");
+    }
+
+    public static bool AskQuestion(Question question, int questionNumber)
+    {
+        DisplayQuestion(question, questionNumber);
+
+        string userGuess = GetGuessFromUser();
+        return DisplayResult(userGuess, question);
+    }
+
+    private static string GetGuessFromUser()
+    {
+        //TODO: handle possible responses other than 1, 2, or 3
+        ArrayList acceptedAnsewers = new() { "1", "2", "3" };
+        bool validAnswer = false;
+        string userGuess = "";
+        while (!validAnswer)
+        {
+            userGuess = Console.ReadLine().Trim();
+            if (acceptedAnsewers.Contains(userGuess))
             {
-                int lineIndex = i * 5;
-                string questionText = lines[lineIndex];
-
-                string answer1 = lines[lineIndex + 1];
-                string answer2 = lines[lineIndex + 2];
-                string answer3 = lines[lineIndex + 3];
-
-                string correctAnswerIndex = lines[lineIndex + 4];
-
-                Question question = new Question();
-                question.Text = questionText;
-                question.Answers = new string[3];
-                question.Answers[0] = answer1;
-                question.Answers[1] = answer2;
-                question.Answers[2] = answer3;
-                question.CorrectAnswerIndex = correctAnswerIndex;
+                validAnswer = true;
             }
-            return questions;
+            else
+            {
+                validAnswer = false;
+                Console.WriteLine("Invalid input. Please enter: 1, 2, or 3.");
+            }
         }
+
+        return userGuess;
+    }
+
+    public static bool DisplayResult(string userGuess, Question question)
+    {
+        if (userGuess == question.CorrectAnswerIndex)
+        {
+            Console.WriteLine("Correct!\n");
+            return true;
+        }
+
+        Console.WriteLine("Incorrect!\n");
+        return false;
+    }
+
+    public static void DisplayQuestion(Question question, int questionNumber)
+    {
+        Console.WriteLine($"Question {questionNumber}: " + question.Text);
+        for (int i = 0; i < question.Answers.Length; i++) //TODO: handle for null question
+        {
+            Console.WriteLine((i + 1) + ": " + question.Answers[i]);
+        }
+    }
+
+    public static string GetFilePath()
+    {
+        return "Trivia.txt";
+    }
+
+    public static Question[] LoadQuestions(string filePath)
+    {
+        //TODO: add a try catch in case no file 
+        //TODO: handle different files, any number of questions
+        string[] lines = File.ReadAllLines(filePath);
+
+        Question[] questions = new Question[lines.Length / 5];
+        for (int i = 0; i < questions.Length; i++)
+        {
+            int lineIndex = i * 5;
+            string questionText = lines[lineIndex];
+
+            string answer1 = lines[lineIndex + 1];
+            string answer2 = lines[lineIndex + 2];
+            string answer3 = lines[lineIndex + 3];
+
+            string correctAnswerIndex = lines[lineIndex + 4];
+
+            Question question = new Question();
+            question.Text = questionText;
+            question.Answers = new string[3];
+            question.Answers[0] = answer1;
+            question.Answers[1] = answer2;
+            question.Answers[2] = answer3;
+            question.CorrectAnswerIndex = correctAnswerIndex;
+            questions[i] = question;
+        }
+
+        return questions;
+    }
+
+    public static Question[] RandomizeQuestions(Question[] questions)
+    {
+        // Returns randomized version of input without changing the input
+        Random random = new();
+
+        List<Question> questionsList = questions.ToList();
+        Question[] randomizedQuestions = questions;
+
+        do
+        {
+            var randomized = questionsList.OrderBy(item => random.Next());
+            randomizedQuestions = randomized.ToArray();
+        } while (questions == questionsList.ToArray());
+
+        return randomizedQuestions;
     }
 }
