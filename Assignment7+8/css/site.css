@@ -1,35 +1,8 @@
-div {
-    padding: 2px;
-    margin: 3px;
-    border: 2px solid black;
-}
-
-button:hover {
-    padding: 3px;
-
-}
-
 div.middle {
-    text-align: center;
     margin: auto;
     max-width: 70%; 
 }
 
-#idname {
-    color: brown;
-}
-
-
-table, th, td {
-    border: 1px solid white;
-    border-collapse: collapse;
-  }
-  tbody {
-    background-color: lightgray; 
-  }
-  tfoot {
-    background-color: darkgray;
-  }
 
 
 /* ------------------------------------------ Sizing ------------------------------------ */
