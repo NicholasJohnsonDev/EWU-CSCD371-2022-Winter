@@ -1,9 +1,44 @@
-div.middle {
+a{
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.middle {
     margin: auto;
     max-width: 70%; 
 }
 
+.background-black {
+    background-color: black;
+} 
+.background-lightgray {
+    background-color: lightgray;
+} 
 
+.big-text {
+    font-size: 2em;
+}
+
+.medium-text {
+    font-size: 1.5em;
+}
+
+.ewu-red-text {
+    color: #A10022;
+}
+
+.white-text {
+    color: white;
+}
+
+.rounded { border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -ms-border-radius: .25em; -o-border-radius: .25em; }
+
+.gradient {
+    background-image: linear-gradient(to right,  rgb(0, 138, 150), rgb(1, 148, 250));
+}
 
 /* ------------------------------------------ Sizing ------------------------------------ */
 
