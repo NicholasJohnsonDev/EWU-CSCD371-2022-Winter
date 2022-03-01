@@ -45,17 +45,20 @@
         <!-- TODO: Should the below be a table? -->
         <section><h2>A Joke</h2></section>
         <section>
-          <p>Why are modern programming languages so materialistic?</p>
-          <p>Because they are object oriented.</p>
+          <p id="setup"></p>
+          <p id="delivery"></p>
+          <p id="single-joke"></p>
         </section>
         <section>
-          <button class="gradient white-text">Another Joke</button>
-          <button class="rounded background-lightgray">Joke API</button>
+          <button class="gradient white-text" onclick="fetchJoke();">Another Joke</button>
+          <button class="rounded background-lightgray"><a href="https://v2.jokeapi.dev/joke/Programming">Joke API</a></button>
         </section>
       </main>
       <footer></footer>
     </div>
 
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>
