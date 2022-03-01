@@ -20,6 +20,7 @@ function fetchJoke(){
     },
     (error) => {
       console.log(error);
+      document.getElementById("setup").innerHTML = "Please try again in a few moments.";
     }
   );
 }
