@@ -15,6 +15,9 @@ ul {
 #cardFooter{
     background-color: lightgray;
 }
+#closeIcon {
+    display: none;
+}
 .hamburger {
     position: fixed;
     z-index: 100;
@@ -22,9 +25,6 @@ ul {
     right: 1rem;
     padding: 4px;
     cursor: pointer;
-}
-#closeIcon {
-    display: none;
 }
 .menu {
     position: fixed;
