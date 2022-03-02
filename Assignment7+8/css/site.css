@@ -6,6 +6,46 @@ ul {
     list-style-type: none;
 }
 
+#cardHeader{
+    background-color: lightgray;
+}
+#cardBody{
+    background-color: lightgray;
+}
+#cardFooter{
+    background-color: lightgray;
+}
+.hamburger {
+    position: fixed;
+    z-index: 100;
+    top: 1rem;
+    right: 1rem;
+    padding: 4px;
+    cursor: pointer;
+}
+#closeIcon {
+    display: none;
+}
+.menu {
+    position: fixed;
+    transform: translateY(-1000%);
+    transition: transform 0.5s;
+    //style elements below don't touch above
+    left: 20;
+    right: 0;
+    z-index: 99;
+    background: white;
+    border-style: solid;
+    border-color: black;
+    color: white;
+    list-style: none;
+    padding-top: 4rem;
+  }
+
+.showMenu {
+    transform: translateY(0);
+}
+
 .middle {
     margin: auto;
     max-width: 70%; 
