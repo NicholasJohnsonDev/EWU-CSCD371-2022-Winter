@@ -30,7 +30,6 @@ ul {
     position: fixed;
     transform: translateY(-1000%);
     transition: transform 0.5s;
-    //style elements below don't touch above
     left: 20;
     right: 0;
     z-index: 99;
