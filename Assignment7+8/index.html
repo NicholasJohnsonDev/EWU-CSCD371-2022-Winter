@@ -15,37 +15,36 @@
 
   <body>
     <div class="middle">
-      <ul class="menu">
+      <ul class="menu width-min-max">
         <li>
           <button class="menuItem gradient rounded">
-            <a href="">Find Miracle Max</a>
+            <a class="medium-text" href="">Find Miracle Max</a>
           </button>
         </li>
         <br />
         <li>
           <button class="menuItem gradient rounded">
-            <a href="">Storm The Castle</a>
+            <a class="medium-text" href="">Storm The Castle</a>
           </button>
         </li>
         <br />
         <li>
           <button class="menuItem gradient rounded">
-            <a href="">Do Chores</a>
+            <a class="medium-text" href="">Do Chores</a>
           </button>
         </li>
         <br />
         <li>
           <button class="menuItem gradient rounded">
-            <a href="">Become UnMostly Dead</a>
+            <a class="medium-text" href="">Become UnMostly Dead</a>
           </button>
         </li>
-        <br />
       </ul>
 
       <header class="background-black">
         <div class="ewu-red-text big-text">EWU</div>
-        <nav class="medium-text white-text">
-          <button class="hamburger">
+        <nav class="medium-text white-text background-black">
+          <button class="hamburger background-black">
             Menu
             <i id="menuIcon" class="fa fa-bars"></i>
             <i id="closeIcon" class="fa-solid fa-x"></i>
@@ -69,14 +68,18 @@
               <p id="single-joke"></p>
             </section>
           </div>
-          <hr />
+          <hr class="margin-0" />
           <div id="cardFooter">
             <section>
-              <button class="gradient white-text" onclick="fetchJoke();">
-                Another Joke
+              <button class="gradient white-text tall" onclick="fetchJoke();">
+                <span class="medium-text">Another Joke</span>
               </button>
-              <button class="rounded background-lightgray">
-                <a href="https://v2.jokeapi.dev/joke/Programming">Joke API</a>
+              <button class="rounded background-lightgray tall">
+                <a
+                  class="medium-text"
+                  href="https://v2.jokeapi.dev/joke/Programming"
+                  >Joke API</a
+                >
               </button>
             </section>
           </div>
