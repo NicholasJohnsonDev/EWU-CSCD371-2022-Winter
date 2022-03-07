@@ -26,7 +26,7 @@ function fetchJoke(){
 }
 
 //Followed this hamburger tutorial https://dev.to/ljcdev/easy-hamburger-menu-with-js-2do0
-//Modified some styling to fit the reqs but other than that the general logic was followed from the above site.
+//Modified some styling to fit the requirements but other than that the general logic was followed from the above site.
 
 //grab the elements
 const menu = document.querySelector(".menu");

@@ -1,80 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EWU Joke Page</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="icon" href="images\ewuEagleBlackRed.png" />
+    <script
+      src="https://kit.fontawesome.com/c477b7ac4e.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EWU Joke Page</title>
-  <link rel="stylesheet" href="css/site.css" />
-  <link rel="icon" href="images\ewuEagleBlackRed.png" />
-  <script src="https://kit.fontawesome.com/c477b7ac4e.js" crossorigin="anonymous"></script>
-</head>
+  <body>
+    <div class="middle">
+      <ul class="menu">
+        <li>
+          <button class="menuItem gradient rounded">
+            <a href="">Find Miracle Max</a>
+          </button>
+        </li>
+        <br />
+        <li>
+          <button class="menuItem gradient rounded">
+            <a href="">Storm The Castle</a>
+          </button>
+        </li>
+        <br />
+        <li>
+          <button class="menuItem gradient rounded">
+            <a href="">Do Chores</a>
+          </button>
+        </li>
+        <br />
+        <li>
+          <button class="menuItem gradient rounded">
+            <a href="">Become UnMostly Dead</a>
+          </button>
+        </li>
+        <br />
+      </ul>
 
-<body>
-  <ul class="menu">
-    <li>
-      <button class="menuItem gradient rounded"><a href="">Find Miracle Max</a></button>
-    </li><br>
-    <li>
-      <button class="menuItem gradient rounded"><a href="">Storm The Castle</a></button>
-    </li><br>
-    <li>
-      <button class="menuItem gradient rounded"><a href="">Do Chores</a></button>
-    </li><br>
-    <li>
-      <button class="menuItem gradient rounded"><a href="">Become UnMostly Dead</a></button>
-    </li><br>
-  </ul>
+      <header class="background-black">
+        <div class="ewu-red-text big-text">EWU</div>
+        <nav class="medium-text white-text">
+          <button class="hamburger">
+            Menu
+            <i id="menuIcon" class="fa fa-bars"></i>
+            <i id="closeIcon" class="fa-solid fa-x"></i>
+          </button>
+        </nav>
+      </header>
 
-  <button class="hamburger medium-text">
-    <i id = "menuIcon" class="fa fa-bars"></i>
-    <i id = "closeIcon" class="fa-solid fa-x"></i>
-  </button>
-
-  <div class="middle">
-    <header class="background-black">
-      <div class="ewu-red-text big-text">EWU</div>
-      <nav>
-        <div class="white-text">
-          <div class="medium-text">Menu &nbsp;<i class="fa fa-bars"></i></div>
-        
+      <main>
+        <h1>The Joke Page</h1>
+        <hr />
+        <div id="card">
+          <div id="cardHeader">
+            <section>
+              <h2>A Joke</h2>
+            </section>
+          </div>
+          <div id="cardBody">
+            <section>
+              <p id="setup"></p>
+              <p id="delivery"></p>
+              <p id="single-joke"></p>
+            </section>
+          </div>
+          <hr />
+          <div id="cardFooter">
+            <section>
+              <button class="gradient white-text" onclick="fetchJoke();">
+                Another Joke
+              </button>
+              <button class="rounded background-lightgray">
+                <a href="https://v2.jokeapi.dev/joke/Programming">Joke API</a>
+              </button>
+            </section>
+          </div>
         </div>
-      </nav>
-    </header>
+      </main>
+    </div>
 
-
-    <main>
-      <h1>The Joke Page</h1>
-      <hr />
-      <!-- TODO: Should the below be a table? -->
-      <div id="card">
-        <div id="cardHeader">
-          <section>
-            <h2>A Joke</h2>
-          </section>
-        </div>
-        <div id="cardBody">
-          <section>
-            <p id="setup"></p>
-            <p id="delivery"></p>
-            <p id="single-joke"></p>
-          </section>
-        </div>
-        <div id="cardFooter">
-          <section>
-            <button class="gradient white-text" onclick="fetchJoke();">Another Joke</button>
-            <button class="rounded background-lightgray"><a href="https://v2.jokeapi.dev/joke/Programming">Joke
-                API</a></button>
-          </section>
-        </div>
-      </div>
-    </main>
-  </div>
-  
-  <!-- axios -->
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="js/index.js"></script>
-</body>
-
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
