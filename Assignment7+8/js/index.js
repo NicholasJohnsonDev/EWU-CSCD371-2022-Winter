@@ -26,7 +26,7 @@ function fetchJoke(){
 }
 
 //Followed this hamburger tutorial https://dev.to/ljcdev/easy-hamburger-menu-with-js-2do0
-//Modified some styling to fit the reqs but other than that the general logic was followed from the above site.
+//Modified some styling to fit the requirements but other than that the general logic was followed from the above site.
 
 //grab the elements
 const menu = document.querySelector(".menu");
@@ -41,13 +41,13 @@ function toggleMenu(){
     menu.classList.remove("showMenu");
     //change favicon back to a hamburger
     closeIcon.style.display = "none";
-    menuIcon.style.display = "block";
+    menuIcon.style.display = "inline";
   } 
   //change menu element's class to show it's contents
   else{
     menu.classList.add("showMenu");
     //change favicon to an x
-    closeIcon.style.display = "block";
+    closeIcon.style.display = "inline";
     menuIcon.style.display = "none";
   }
 }
