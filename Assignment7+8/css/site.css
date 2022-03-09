@@ -56,7 +56,8 @@ br {
 
 .menuItem {
     width: 8rem;
-    margin: auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em;
