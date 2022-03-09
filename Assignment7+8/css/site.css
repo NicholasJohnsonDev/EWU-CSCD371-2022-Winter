@@ -16,6 +16,15 @@ br {
     margin: 0.2em;
  }
 
+button {
+    opacity: 1;
+}
+
+ button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
 #card{ 
     border: 0.08em solid black;
     border-top-left-radius: 0.25em;
@@ -67,7 +76,6 @@ br {
     position: fixed;
     z-index: 100;
     top: 0.5rem;
-    right: 6em;
     
     background: none;
 	color: inherit;
