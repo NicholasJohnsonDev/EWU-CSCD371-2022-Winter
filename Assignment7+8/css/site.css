@@ -79,12 +79,10 @@ br {
     position: fixed;
     transform: translateY(-1000rem);
     transition: transform 0.5s;
-    left: 20;
-    right: 0;
+    left: 40rem;
     z-index: 99;
     background: white;
     border: .2em solid gray;
-    color: white;
     list-style: none;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -94,10 +92,6 @@ br {
 
 .showMenu {
     transform: translate(-75%, 15%);
-    -webkit-transform: translate(-75%, 15%);
-    -moz-transform: translate(-75%, 15%);
-    -ms-transform: translate(-75%, 15%);
-    -o-transform: translate(-75%, 15%);
 }
 
 .background-black {
@@ -215,11 +209,7 @@ br {
     } 
     .showMenu {
         transform: translate(-90%, 8%);
-        -webkit-transform: translate(-90%, 8%);
-        -moz-transform: translate(-90%, 8%);
-        -ms-transform: translate(-90%, 8%);
-        -o-transform: translate(-90%, 8%);
-}
+    }
 }
 
 /* 992 */
