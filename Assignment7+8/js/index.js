@@ -15,7 +15,7 @@ function fetchJoke(){
         document.getElementById("delivery").innerHTML = "";
         setTimeout(function(){
         document.getElementById("delivery").innerHTML = response.data.delivery;
-        }, 800);
+        }, 4000);
       }
     },
     (error) => {
@@ -41,13 +41,13 @@ function toggleMenu(){
     menu.classList.remove("showMenu");
     //change favicon back to a hamburger
     closeIcon.style.display = "none";
-    menuIcon.style.display = "inline";
+    menuIcon.style.display = "block";
   } 
   //change menu element's class to show it's contents
   else{
     menu.classList.add("showMenu");
     //change favicon to an x
-    closeIcon.style.display = "inline";
+    closeIcon.style.display = "block";
     menuIcon.style.display = "none";
   }
 }
@@ -59,4 +59,4 @@ menuItems.forEach(
   function(menuItem) { 
     menuItem.addEventListener("click", toggleMenu);
   }
-)
+);
