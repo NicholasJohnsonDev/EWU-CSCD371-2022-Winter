@@ -297,8 +297,8 @@ a:visited { text-decoration: none; color:black; }
         right: 17%;
     } 
     .showMenu {
-        transform: translate(-95%, 12%);
-    }
+        transform: translate(35%, 12%);
+}
 }
 
 /* 16K */
