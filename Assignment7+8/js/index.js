@@ -15,7 +15,7 @@ function fetchJoke(){
         document.getElementById("delivery").innerHTML = "";
         setTimeout(function(){
         document.getElementById("delivery").innerHTML = response.data.delivery;
-        }, 800);
+        }, 4000);
       }
     },
     (error) => {
