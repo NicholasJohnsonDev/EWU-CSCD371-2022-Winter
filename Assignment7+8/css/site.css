@@ -28,6 +28,10 @@ button {
 }
 a:visited { text-decoration: none; color:black; }
 
+#menuIcon {
+    display: inline;
+}
+
 #card{ 
     border: 0.08em solid black;
     border-top-left-radius: 0.25em;
