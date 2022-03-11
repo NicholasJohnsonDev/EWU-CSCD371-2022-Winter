@@ -1,20 +1,20 @@
-function fetchJoke(){
+function fetchJoke() {
   let sitePath = "https://v2.jokeapi.dev/joke/Programming";
-  axios.get(sitePath).then (
+  axios.get(sitePath).then(
     (response) => {
       //for single jokes 
-      if(response.data.type == "single"){
+      if (response.data.type == "single") {
         document.getElementById("setup").innerHTML = "";
         document.getElementById("delivery").innerHTML = "";
         document.getElementById("single-joke").innerHTML = response.data.joke;
       }
       //For two part jokes
-      if(response.data.setup != null){
+      if (response.data.setup != null) {
         document.getElementById("setup").innerHTML = response.data.setup;
         document.getElementById("single-joke").innerHTML = "";
         document.getElementById("delivery").innerHTML = "";
-        setTimeout(function(){
-        document.getElementById("delivery").innerHTML = response.data.delivery;
+        setTimeout(function () {
+          document.getElementById("delivery").innerHTML = response.data.delivery;
         }, 4000);
       }
     },
@@ -26,7 +26,7 @@ function fetchJoke(){
 }
 
 //Followed this hamburger tutorial https://dev.to/ljcdev/easy-hamburger-menu-with-js-2do0
-//Modified some styling to fit the requirements but other than that the general logic was followed from the above site.
+//Modified some styling to fit the requirements but other than that the general logic was followed from the above tutorial.
 
 //grab the elements
 const menu = document.querySelector(".menu");
@@ -35,16 +35,17 @@ const hamburger = document.querySelector(".hamburger");
 const closeIcon = document.querySelector("#closeIcon");
 const menuIcon = document.querySelector("#menuIcon");
 
-function toggleMenu(){
+function toggleMenu() {
   //change menu element's class to hide it's contents
-  if(menu.classList.contains("showMenu")){
+  if (menu.classList.contains("showMenu")) {
     menu.classList.remove("showMenu");
     //change favicon back to a hamburger
     closeIcon.style.display = "none";
     menuIcon.style.display = "inline";
-  } 
+  }
+
   //change menu element's class to show it's contents
-  else{
+  else {
     menu.classList.add("showMenu");
     //change favicon to an x
     closeIcon.style.display = "inline";
@@ -55,8 +56,9 @@ function toggleMenu(){
 //listen for the mouse click on the hamburger icon.
 hamburger.addEventListener("click", toggleMenu);
 
-menuItems.forEach( 
-  function(menuItem) { 
+//automatically hide menu when a button is clicked
+menuItems.forEach(
+  function (menuItem) {
     menuItem.addEventListener("click", toggleMenu);
   }
-);
+)
