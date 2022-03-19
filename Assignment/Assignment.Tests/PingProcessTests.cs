@@ -18,6 +18,7 @@ public class PingProcessTests
         Sut = new();
     }
 
+
     [TestMethod]
     public void Start_PingProcess_Success()
     {
@@ -58,15 +59,25 @@ public class PingProcessTests
     public void RunTaskAsync_Success()
     {
         // Do NOT use async/await in this test.
-        // Test Sut.RunTaskAsync("localhost");
+        AssertValidPingOutput(Sut.RunTaskAsync("localhost").Result);
     }
+
+    //Review later if needed.
+    // [TestMethod]
+
+    // public void RunTaskAsync_Fail()
+    // {
+    //     // Do NOT use async/await in this test.
+    //     AssertValidPingOutput(Sut.RunTaskAsync("qqqqqqqqqqqqqq").Result);
+    // }
 
     [TestMethod]
     public void RunAsync_UsingTaskReturn_Success()
     {
         // Do NOT use async/await in this test.
         PingResult result = default;
-        // Test Sut.RunAsync("localhost");
+        Task<PingResult> task = Sut.RunAsync("localhost");
+        result = task.Result;
         AssertValidPingOutput(result);
     }
 
@@ -74,24 +85,43 @@ public class PingProcessTests
     async public Task RunAsync_UsingTpl_Success()
     {
         // DO use async/await in this test.
-        PingResult result = default;
-
-        // Test Sut.RunAsync("localhost");
+        Task<PingResult> task = Sut.RunAsync("localhost");
+        PingResult result = await task;
         AssertValidPingOutput(result);
     }
 
     [TestMethod]
     [ExpectedException(typeof(AggregateException))]
-    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
+    public async Task RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
+        //Create a new token
+        CancellationTokenSource cancellationTokenSource = new();
 
+        //Cancel Token
+        cancellationTokenSource.Cancel();
+
+        //Pass it into the method
+        Task<PingResult> task = Sut.RunAsync("localhost", cancellationTokenSource.Token);
+
+        // TODO: not throwing exception "AggregateException"
+        // Test method threw exception System.Threading.Tasks.TaskCanceledException, but exception System.AggregateException was expected.
+        PingResult result = await task;
     }
 
     [TestMethod]
     [ExpectedException(typeof(TaskCanceledException))]
-    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
+    public async Task RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
-        // Use exception.Flatten()
+        //Create a new token
+        CancellationTokenSource cancellationTokenSource = new();
+
+        //Cancel Token
+        cancellationTokenSource.Cancel();
+
+        //Pass it into the method
+        Task<PingResult> task = Sut.RunAsync("localhost", cancellationTokenSource.Token);
+
+        PingResult result = await task;
     }
 
     [TestMethod]

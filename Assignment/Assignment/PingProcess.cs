@@ -13,6 +13,10 @@ public record struct PingResult(int ExitCode, string? StdOutput);
 
 public class PingProcess
 {
+    // not working on Windows
+    //Limiting the ping command ping -c 2 8.8.8.8
+    //Format - ping Address -c #times we want to ping the IP
+
     private ProcessStartInfo StartInfo { get; } = new("ping");
 
     public PingResult Run(string hostNameOrAddress)
@@ -27,15 +31,28 @@ public class PingProcess
 
     public Task<PingResult> RunTaskAsync(string hostNameOrAddress)
     {
-        throw new NotImplementedException();
+        return Task.Run(
+            () => Run(hostNameOrAddress)
+            );
     }
 
     async public Task<PingResult> RunAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task task = null!;
-        await task;
-        throw new NotImplementedException();
+        StartInfo.Arguments = hostNameOrAddress;
+        StringBuilder? stringBuilder = null;
+        void UpdateStdOutput(string? line) =>
+            (stringBuilder ??= new StringBuilder()).AppendLine(line);
+
+        Task<PingResult> task = Task.Run(
+            () =>
+            {
+                Process process = RunProcessInternal(StartInfo, UpdateStdOutput, default, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                return new PingResult(process.ExitCode, stringBuilder?.ToString());
+            }, cancellationToken);
+
+        return await task;
     }
 
     async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
