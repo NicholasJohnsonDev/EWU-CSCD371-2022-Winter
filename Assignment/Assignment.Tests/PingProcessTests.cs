@@ -92,7 +92,7 @@ public class PingProcessTests
 
     [TestMethod]
     [ExpectedException(typeof(AggregateException))]
-    public async Task RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
+    public Task RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
         //Create a new token
         CancellationTokenSource cancellationTokenSource = new();
@@ -102,10 +102,11 @@ public class PingProcessTests
 
         //Pass it into the method
         Task<PingResult> task = Sut.RunAsync("localhost", cancellationTokenSource.Token);
+        
+        _ = task.Result;
 
-        // TODO: not throwing exception "AggregateException"
-        // Test method threw exception System.Threading.Tasks.TaskCanceledException, but exception System.AggregateException was expected.
-        PingResult result = await task;
+        cancellationTokenSource.Dispose();
+        return Task.CompletedTask;
     }
 
     [TestMethod]
@@ -121,7 +122,9 @@ public class PingProcessTests
         //Pass it into the method
         Task<PingResult> task = Sut.RunAsync("localhost", cancellationTokenSource.Token);
 
-        PingResult result = await task;
+        _ = await task.ConfigureAwait(false);
+
+        cancellationTokenSource.Dispose();
     }
 
     [TestMethod]

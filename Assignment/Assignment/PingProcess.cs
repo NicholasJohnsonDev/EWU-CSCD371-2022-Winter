@@ -55,13 +55,13 @@ public class PingProcess
         return await task;
     }
 
-    async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
+    async public Task<PingResult> RunAsync(IEnumerable<string> hostNameOrAddresses,
+        CancellationToken cancellationToken = default)
     {
         StringBuilder? stringBuilder = null;
         ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
-            Task<PingResult> task = null!;
-            // ...
+            Task<PingResult> task = Task.Run(() => Run(item), cancellationToken);
 
             await task.WaitAsync(default(CancellationToken));
             return task.Result.ExitCode;
@@ -69,6 +69,7 @@ public class PingProcess
 
         await Task.WhenAll(all);
         int total = all.Aggregate(0, (total, item) => total + item.Result);
+        // update stringBuilder: "The order of the items in the stdOutput is irrelevent and expected to be intermingled"
         return new PingResult(total, stringBuilder?.ToString());
     }
 
