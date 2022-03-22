@@ -58,18 +58,24 @@ public class PingProcess
     async public Task<PingResult> RunAsync(IEnumerable<string> hostNameOrAddresses,
         CancellationToken cancellationToken = default)
     {
-        StringBuilder? stringBuilder = null;
-        ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
+        StringBuilder? stringBuilder = new();
+        ParallelQuery<Task<PingResult>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
             Task<PingResult> task = Task.Run(() => Run(item), cancellationToken);
 
             await task.WaitAsync(default(CancellationToken));
-            return task.Result.ExitCode;
+            return task.Result;
         });
 
         await Task.WhenAll(all);
-        int total = all.Aggregate(0, (total, item) => total + item.Result);
+        int total = all.Aggregate(0, (total, item)
+            => total + item.Result.ExitCode); // 0
         // update stringBuilder: "The order of the items in the stdOutput is irrelevent and expected to be intermingled"
+        // thank you for doing aggregate above as an example/remider
+        stringBuilder.Append(all.Aggregate("", (compiledString, currentString)
+            => compiledString.Trim() + currentString.Result.StdOutput).Trim());
+
+        // int? lineCount = stringBuilder?.ToString().Split(Environment.NewLine).Length; // format stringBuilder to 40 lines
         return new PingResult(total, stringBuilder?.ToString());
     }
 
