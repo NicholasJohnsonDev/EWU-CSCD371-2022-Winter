@@ -79,12 +79,21 @@ public class PingProcess
         return new PingResult(total, stringBuilder?.ToString());
     }
 
-    async public Task<PingResult> RunLongRunningAsync(
-        string hostNameOrAddress, CancellationToken cancellationToken = default)
+    //not passing tests idk if it's me or my OS
+    async public Task<PingResult> RunLongRunningAsync(string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task task = null!;
-        await task;
-        throw new NotImplementedException();
+        StartInfo.Arguments = hostNameOrAddress;
+        StringBuilder? stringBuilder = null;
+        void UpdateStdOutput(string? line) =>
+            (stringBuilder ??= new StringBuilder()).AppendLine(line);
+        
+        Task<PingResult> task = Task.Factory.StartNew(() =>
+        {
+            Process process = RunProcessInternal(StartInfo, UpdateStdOutput, default, cancellationToken); 
+            return new PingResult(process.ExitCode, stringBuilder?.ToString());
+        }, cancellationToken, TaskCreationOptions.LongRunning, TaskScheduler.Current);
+        
+        return await task;
     }
 
     private Process RunProcessInternal(
