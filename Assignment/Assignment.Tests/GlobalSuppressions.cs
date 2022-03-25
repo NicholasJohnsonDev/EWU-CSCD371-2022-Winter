@@ -16,3 +16,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "CA2201:Do not raise reserved exception types", Justification = "Suppressing warning in provided file")]
 [assembly: SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Suppressing warning in provided file")]
 [assembly: SuppressMessage("Reliability", "CA2007:Consider calling ConfigureAwait on the awaited task", Justification = "Need to do it per assignment directions")]
+[assembly: SuppressMessage("Design", "CA1016:Mark assemblies with AssemblyVersionAttribute", Justification = "Not required in this assignment")]
